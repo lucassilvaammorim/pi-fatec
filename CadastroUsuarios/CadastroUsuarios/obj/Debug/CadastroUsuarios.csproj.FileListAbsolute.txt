@@ -1,0 +1,16 @@
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\bin\Debug\CadastroUsuarios.exe.config
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\bin\Debug\CadastroUsuarios.exe
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\bin\Debug\CadastroUsuarios.pdb
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\bin\Debug\EntityFramework.dll
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\bin\Debug\EntityFramework.xml
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\obj\Debug\CadastroUsuarios.csprojResolveAssemblyReference.cache
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\obj\Debug\CadastroUsuarios.Form1.resources
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\obj\Debug\CadastroUsuarios.Properties.Resources.resources
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\obj\Debug\CadastroUsuarios.csproj.GenerateResource.cache
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\obj\Debug\CadastroUsuarios.csproj.CoreCompileInputs.cache
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\obj\Debug\CadastroUsuarios.csproj.CopyComplete
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\obj\Debug\CadastroUsuarios.exe
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\obj\Debug\CadastroUsuarios.pdb
+C:\Users\Lucas Amorim\Desktop\PI\CadastroUsuarios\CadastroUsuarios\obj\Debug\CadastroUsuarios.Migrations.v1.resources
