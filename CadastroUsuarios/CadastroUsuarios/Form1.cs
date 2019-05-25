@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,6 +20,7 @@ namespace CadastroUsuarios
         String RxString;
         public Form1()
         {
+            //inicializacao de componentes
             InitializeComponent();
             dados = new CartaoDao();
             timerCom.Enabled = true;
@@ -70,6 +72,7 @@ namespace CadastroUsuarios
         }
         private void bt_salvar_Click(object sender, EventArgs e)
         {
+            //salvar dados
             try
             {
                 dados.Insert(new Cartao()
@@ -94,6 +97,7 @@ namespace CadastroUsuarios
 
         private void bt_atualizar_Click(object sender, EventArgs e)
         {
+            //atualizar dados
             try
             {
                 dados.Update(new Cartao()
@@ -117,6 +121,7 @@ namespace CadastroUsuarios
 
         private void bt_deletar_Click(object sender, EventArgs e)
         {
+            //deletar dados
             try
             {
                 Cartao car = dados.GetById(this.tb_id.Text);
@@ -132,6 +137,7 @@ namespace CadastroUsuarios
 
         private void dgv_dados_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //carrega dados selcionados da grid view
             if (dgv_dados.Rows.Count > 0)
             {
                 foreach (DataGridViewRow row in dgv_dados.SelectedRows)
@@ -154,23 +160,23 @@ namespace CadastroUsuarios
 
         private void btn_con_Click(object sender, EventArgs e)
         {
+            //abertura de porta serial
             if (serialPort1.IsOpen == false)
             {
                 try
                 {
                     serialPort1.PortName = cb_port.Items[cb_port.SelectedIndex].ToString();
                     serialPort1.Open();
-
-                }
-                catch
-                {
-                    return;
-
-                }
-                if (serialPort1.IsOpen)
-                {
                     btn_con.Text = "Desconectar";
                     cb_port.Enabled = false;
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    return;
 
                 }
             }
@@ -193,37 +199,60 @@ namespace CadastroUsuarios
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            //fechando a porta serial
             if (serialPort1.IsOpen)
                 serialPort1.Close();
         }
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            //le a entrada da serial e dispara evento para escrever na serial
             RxString = serialPort1.ReadExisting();
             this.Invoke(new EventHandler(serialResponse));
         }
         private void serialResponse(object sender, EventArgs e)
         {
-            txt_serial.AppendText("Recebido <- " + RxString);
-            Cartao cartaoEscolhido = dados.GetById(RxString);
-            if (cartaoEscolhido != null)
+            try
             {
-                if (cartaoEscolhido.Validade >= DateTime.Today)
+                //recebe numero da serial
+                txt_serial.AppendText("Recebido <- " + RxString);
+
+                //filtra sujeira (como barra n)
+                RxString = RxString.Substring(0, RxString.Length - 2);
+
+                //busca no banco de dados
+                Cartao cartaoEscolhido = dados.GetById(RxString);
+
+                //delay 1 segundo
+                Thread.Sleep(1000);
+
+                //respostas para a serial
+                //serial.write escreve na serial / append text adiciona texto no textbox
+                if (cartaoEscolhido != null)
                 {
-                    serialPort1.Write("200"); //status code OK
-                    txt_serial.AppendText("Enviado -> " + "200" + " ( enviado com sucesso)");
+                    if (cartaoEscolhido.Validade >= DateTime.Today)
+                    {
+                        serialPort1.Write("1"); //status code OK
+                        txt_serial.AppendText("Enviado ->( enviado com sucesso)");
+                    }
+                    else
+                    {
+                        serialPort1.Write("0");//status not found
+                        txt_serial.AppendText("Enviado ->( Fora da data de validade)");
+                    }
                 }
                 else
                 {
-                    serialPort1.Write("404");//status not found
-                    txt_serial.AppendText("Enviado -> " + "404" + " ( Fora da data de validade)");
+                    serialPort1.Write("0");//status not found
+                    txt_serial.AppendText("Enviado ->( Registro incorreto)");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                serialPort1.Write("404");//status not found
-                txt_serial.AppendText("Enviado -> " + "404" + " ( Registro incorreto)");
+
+                MessageBox.Show(ex.ToString());
             }
+
         }
     }
 }

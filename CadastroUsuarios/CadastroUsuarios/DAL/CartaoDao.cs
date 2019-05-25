@@ -10,11 +10,14 @@ namespace CadastroUsuarios.DAL
     public class CartaoDao
     {
         CartaoContext modelContext;
+
+        //persistencia de dados entity framework
         public CartaoDao()
         {
             modelContext = new CartaoContext();
         }
 
+        //buscar todos os registros
         public List<Cartao> GetAll()
         {
             try
@@ -27,6 +30,7 @@ namespace CadastroUsuarios.DAL
             }
         }
 
+        //buscar registro pelo id do cartao
         public Cartao GetById(String cartaoId)
         {
             try
@@ -39,6 +43,7 @@ namespace CadastroUsuarios.DAL
             }
         }
 
+        //inserir novo registro
         public void Insert(Cartao cartao)
         {
             try
@@ -52,6 +57,7 @@ namespace CadastroUsuarios.DAL
             }
         }
 
+        //deletar registro
         public void Delete(Cartao cartao)
         {
             try
@@ -65,6 +71,7 @@ namespace CadastroUsuarios.DAL
             }
         }
 
+        //atualizar registro
         public void Update(Cartao newObject)
         {
             try
